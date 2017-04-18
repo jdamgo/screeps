@@ -1,4 +1,4 @@
-const credentials = require('screeps-credentials')
+const credentials = require('./screeps-credentials')
 
 module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-screeps')
@@ -8,7 +8,7 @@ module.exports = function (grunt) {
       options: {
         email: credentials.email,
         password: credentials.password,
-        branch: 'default',
+        branch: 'develop',
         ptr: false,
       },
       dist: {
