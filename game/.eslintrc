@@ -1,4 +1,4 @@
 
 extends:
   - '../.eslintrc'
-  - './eslintrc-screeps.yml'
+  - './.eslintrc-screeps.yml'

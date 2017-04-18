@@ -1,0 +1,10 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "grunt": "^1.0.1",
+    "grunt-screeps": "^1.2.1"
+  },
+  "preferGlobal": true,
+  "private": true
+}
