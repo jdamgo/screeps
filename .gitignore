@@ -1,0 +1,34 @@
+
+#####################
+## Windows detritus
+#####################
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac crap
+.DS_Store
+
+
+###############
+## JavaScript
+###############
+
+# Node.js
+npm-debug.log
+node_modules
+
+
+###################
+## Custom Ignores
+###################
+
+screeps-credentials.json
+--*
