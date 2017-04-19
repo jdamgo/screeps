@@ -1,3 +1,8 @@
+
+/* HINTS
+ *  - https://github.com/Frederikam/Screeps/blob/master/gruntfile.js
+ */
+
 const credentials = require('./screeps-credentials')
 
 module.exports = function (grunt) {

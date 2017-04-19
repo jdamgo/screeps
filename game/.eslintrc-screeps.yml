@@ -1,7 +1,7 @@
 
 globals:
+  
   ########## ########## Global Objects ########## ##########
-  # API: [Global Objects](http://support.screeps.com/hc/en-us/articles/203084991-API-Reference)
 
   Game: true
   Map: true
@@ -10,8 +10,44 @@ globals:
   PathFinder: true
   RawMemory: true
 
+
+  ########## ########## Prototypes ########## ##########
+
+  ConstructionSite: true
+  Creep: true
+  Flag: true
+  Mineral: true
+  Nuke: true
+  OwnedStructure: true
+  Resource: true
+  Room: true
+  RoomObject: true
+  RoomPosition: true
+  RoomVisual: true
+  Source: true
+  Structure: true
+  StructureContainer: true
+  StructureController: true
+  StructureExtension: true
+  StructureExtractor: true
+  StructureKeeperLair: true
+  StructureLab: true
+  StructureLink: true
+  StructureNuker: true
+  StructureObserver: true
+  StructurePowerBank: true
+  StructurePowerSpawn: true
+  StructurePortal: true
+  StructureRampart: true
+  StructureRoad: true
+  StructureSpawn: true
+  StructureStorage: true
+  StructureTerminal: true
+  StructureTower: true
+  StructureWall: true
+
+
   ########## ########## Constants ########## ##########
-  # API: [Constants](http://support.screeps.com/hc/en-us/articles/203084991-API-Reference)
 
   OK: true
   ERR_NOT_OWNER: true
