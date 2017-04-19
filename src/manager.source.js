@@ -1,4 +1,5 @@
 // Source Manager
+/** @module Manager.Source */
 
 
 /* ********** ********** Imports ********** ********** */
@@ -104,6 +105,7 @@ function getHarvesterBody(source) {
 /**
  * Manage a given source. (Tick Action)
  *
+ * @instance
  * @private
  *
  * @param {ManagedSource} source - The source to manage.

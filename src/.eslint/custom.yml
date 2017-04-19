@@ -1,0 +1,25 @@
+
+########## ########## Globals ########## ##########
+
+globals:
+  ########## Extensions ##########
+  ID: true
+
+  ########## Console Line Interface ##########
+  Player: true
+
+
+########## ########## Rules ########## ##########
+
+rules:
+  new-cap:
+    # changed
+    - Error
+    - newIsCap: true
+      capIsNew: true
+      newIsCapExceptions: []
+      newIsCapExceptionPattern: ''
+      # added 'ID'
+      capIsNewExceptions: ['ID']
+      capIsNewExceptionPattern: ''
+      properties: true

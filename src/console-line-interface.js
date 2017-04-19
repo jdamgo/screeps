@@ -14,6 +14,7 @@ const sourceManager = require('manager.source')
  * Register a source for harvesting.
  *
  * @public
+ * @todo asfg
  *
  * @param {Source|Source.ID} source - Source object or ID of source to register.
  *

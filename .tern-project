@@ -2,6 +2,6 @@
   "ecmaVersion": 6,
   "libs": [],
   "loadEagerly": [
-    "./tern/screeps/**/*.js"
+    "./.tern/screeps/**/*.js"
   ]
 }

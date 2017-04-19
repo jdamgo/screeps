@@ -1,0 +1,18 @@
+{
+  "source": {
+    "include": ["./src"],
+    "includePattern": ".+\\.js(doc)?$"
+  },
+  "opts": {
+    "destination": "./doc",
+    "private": true
+  },
+  "plugins": [],
+  "templates": {
+    "cleverLinks": true
+  },
+  "tags": {
+    "allowUnknownTags": false,
+    "dictionaries": ["jsdoc"]
+  }
+}
