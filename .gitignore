@@ -30,5 +30,11 @@ node_modules
 ## Custom Ignores
 ###################
 
-screeps-credentials.json
---*
+# General ignore prefix
+'*
+
+# Screeps login credentials
+credentials.json
+
+# JSDoc Documentation
+doc

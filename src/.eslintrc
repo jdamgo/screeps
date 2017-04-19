@@ -1,0 +1,25 @@
+# ESLint configuration for Screeps files
+
+
+########## ########## Inherited Configurations ########## ##########
+
+extends:
+  - 'C:/Users/kilia/GitHub/github-misc/eslint/eslintrc.yml'
+  - './.eslint/api.yml'
+  - './.eslint/custom.yml'
+
+
+########## ########## Parser & Parser Options ########## ##########
+
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    jsx: false
+
+
+########## ########## Environment ########## ##########
+
+env:
+  es6: true
+  node: true

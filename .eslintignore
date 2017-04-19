@@ -1,3 +1,7 @@
 
-# ignore autocomplete directory for tern-js
-.tern/*
+# Exclude all files.
+*.js
+*/*.js
+
+# Include Screeps files.
+!src/*.js
