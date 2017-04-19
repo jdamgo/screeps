@@ -1,13 +1,15 @@
-// Spawns Manager
-
-/* Memory Access
- *  - Memory.spawnQueue
- *  - Room.spawnQueue
- */
+// Spawn Manager
 
 
 /* ********** ********** Variables ********** ********** */
-// XXX
+
+/**
+ * The global, room independant spawn queue.
+ *
+ * @typedef {Array} Memory.spawnQueue
+ *
+ */
+// Memory.spawnQueue
 
 
 /* ********** ********** JSDoc Definitions ********** ********** */
@@ -18,7 +20,20 @@
  * @callback requestCreepCallback
  *
  * @param {Creep} creep - The creep created by the spawn.
-*/
+ *
+ */
+
+/**
+ * One entry of the spawn queue.
+ *
+ * @typedef {Object} SpawnQueueEntry
+ *
+ * @property {Array} body - An array of body parts for the creep,
+ * @property {String} name - The name for the creep.
+ * @property {Object} memory - The initial memory for the creep.
+ * @property {requestCreepCallback} callback - The callback on spawning started.
+ *
+ */
 
 
 /* ********** ********** Functions ********** ********** */
@@ -34,6 +49,7 @@
  * @param {String} [opts.name] - The name of the creep.
  * @param {Object} [opts.memory] - The initial memory of the creep.
  * @param {requestCreepCallback} [opts.callback] - On creep spawning started callback.
+ *
  */
 function requestCreep(body, opts) {
   // select target spawn queue
@@ -41,10 +57,11 @@ function requestCreep(body, opts) {
   if (opts.room) {
     // room specific spawn queue
 
-    // TODO why???
+    /* TODO why???
     if (!opts.room.memory)
       opts.room.memory = Memory.rooms[opts.room.name]
     console.log('asdf')
+    */
 
     if (!opts.room.memory.spawnQueue)
       opts.room.memory.spawnQueue = []
@@ -59,7 +76,6 @@ function requestCreep(body, opts) {
   // add requested creep info to spawn queue
   queue.push({
     body,
-    room: opts.room,
     name: opts.name,
     memory: opts.memory,
     callback: opts.callback,
@@ -72,6 +88,7 @@ function requestCreep(body, opts) {
  * @private
  *
  * @param {StructureSpawn} spawn - The spawn to manage.
+ *
  */
 function manageSpawn(spawn) {
   // check if spawn is busy
@@ -89,14 +106,14 @@ function manageSpawn(spawn) {
           // do not spawn (wait for sufficient energy)
           break spawnQueueDispatchLoop
         default:
-          throw new Error()
+          throw new Error('Cannot spawn creep!')
         }
         // start spawning the requested creep and remove it from the queue
         queue.shift()
-        spawn.createCreep(creepInfo.body, creepInfo.name, creepInfo.memory)
+        const creepName = spawn.createCreep(creepInfo.body, creepInfo.name, creepInfo.memory)
         // notify requester about spawning
         if (creepInfo.callback)
-          creepInfo.callback(spawn.spawning)
+          creepInfo.callback(creepName)
         break
       }
 }

@@ -1,22 +1,29 @@
 
-const sourcesManager = require('manager.sources')
-const spawnsManager = require('manager.spawns')
+/* ********** ********** Imports ********** ********** */
 
-const harvesterRole = require('role.harvester')
+/* ***** Project ***** */
 
+const hfv = require('helper-func-vars')
+const cli = require('console-line-interface')
+
+const sourceManager = require('manager.source')
+const spawnManager = require('manager.spawn')
+
+
+/* ********** ********** ??? ********** ********** */
 
 module.exports.loop = function () {
+  hfv()
+  cli()
+
+  sourceManager.loop()
+  spawnManager.loop()
+
+  // TODO move to creep manager
   for (const creepName in Game.creeps) {
     const creep = Game.creeps[creepName]
-    switch (creep.role) {
-    case 'harvester':
-      harvesterRole.run(creep)
-      break
-    default:
-      throw new Error()
-    }
-  }
+    const script = require(`role.${creep.memory.role}`)
 
-  sourcesManager.loop()
-  spawnsManager.loop()
+    script.run(creep)
+  }
 }
