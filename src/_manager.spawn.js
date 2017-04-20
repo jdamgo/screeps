@@ -1,4 +1,7 @@
 // Spawn Manager
+/**
+@module Spawn Manager
+*/
 
 
 /* ********** ********** Variables ********** ********** */
@@ -42,6 +45,7 @@
  * Request the spawning of a creep.
  *
  * @public
+ * @memberof Manager.Spawn
  *
  * @param {Array} body - A list of body parts for the creep.
  * @param {Object} [opts] - Options for the spawning.

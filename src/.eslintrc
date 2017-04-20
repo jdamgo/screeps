@@ -1,0 +1,44 @@
+# ESLint configuration for Screeps files
+
+
+########## ########## Inherited Configurations ########## ##########
+
+extends:
+  - 'C:/Users/kilia/GitHub/github-misc/eslint/eslintrc.yml'
+  - './.eslint/api.yml'
+  - './.eslint/custom.yml'
+
+
+########## ########## Parser & Parser Options ########## ##########
+
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    globalReturn: false
+    impliedStrict: false
+    jsx: false
+    experimentalObjectRestSpread: true
+
+
+########## ########## Environment ########## ##########
+
+env:
+  es6: true
+  node: true
+
+
+########## ########## Rules ########## ##########
+
+rules:
+  new-cap:
+    # modified: capIsNewExceptions
+    - Error
+    - newIsCap: true
+      capIsNew: true
+      newIsCapExceptions: []
+      newIsCapExceptionPattern: ''
+      # added 'ID' and 'ERR'
+      capIsNewExceptions: ['ID', 'ERR']
+      capIsNewExceptionPattern: ''
+      properties: true

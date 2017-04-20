@@ -1,3 +1,9 @@
 
-# ignore autocomplete directory for tern-js
-.tern/*
+# tern-js directory
+.tern
+
+# distribution directory
+dist
+
+# documentation directory
+doc

@@ -1,4 +1,5 @@
 // Source Manager
+/** @module Manager.Source */
 
 
 /* ********** ********** Imports ********** ********** */
@@ -87,7 +88,7 @@ function getHarvesterBody(source) {
   // substract costs for CARRY and MOVE parts
   remainingEnergy -= BODYPART_COST[CARRY] + BODYPART_COST[MOVE]
   // fill remaining body with WORK parts
-  const workforce = ID(source.id).energyCapacity / (ID(source.id).ticksToRegeneration || ENERGY_REGEN_TIME) / HARVEST_POWER
+  const workforce = ID(source.id).energyCapacity / (ID(source.id).ticksToRegeneration || global.ENERGY_REGEN_TIME) / HARVEST_POWER
   for (let cnt = 0; cnt < workforce; cnt++) {
     if (remainingEnergy - BODYPART_COST[WORK] < 0)
       break
@@ -104,6 +105,7 @@ function getHarvesterBody(source) {
 /**
  * Manage a given source. (Tick Action)
  *
+ * @instance
  * @private
  *
  * @param {ManagedSource} source - The source to manage.

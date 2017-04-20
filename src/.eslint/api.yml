@@ -1,18 +1,17 @@
+# ESLint globals from Screeps API (Version 2017-04-17)
+
+
+########## ########## Globals ########## ##########
 
 globals:
-  
-  ########## ########## Global Objects ########## ##########
-
+  ########## Global Objects ##########
   Game: true
-  Map: true
-  Market: true
   Memory: true
   PathFinder: true
   RawMemory: true
+  Constants: true
 
-
-  ########## ########## Prototypes ########## ##########
-
+  ########## Prototypes ##########
   ConstructionSite: true
   Creep: true
   Flag: true
@@ -46,9 +45,7 @@ globals:
   StructureTower: true
   StructureWall: true
 
-
-  ########## ########## Constants ########## ##########
-
+  ########## Constants ##########
   OK: true
   ERR_NOT_OWNER: true
   ERR_NO_PATH: true
@@ -215,10 +212,14 @@ globals:
   STRUCTURE_NUKER: true
 
   CONSTRUCTION_COST: true
+
+
   CONSTRUCTION_COST_ROAD_SWAMP_RATIO: true
 
   CONTROLLER_LEVELS: true
   CONTROLLER_STRUCTURES: true
+
+
   CONTROLLER_DOWNGRADE: true
   CONTROLLER_CLAIM_DOWNGRADE: true
   CONTROLLER_RESERVE: true
@@ -285,10 +286,14 @@ globals:
 
   MINERAL_REGEN_TIME: true
   MINERAL_MIN_AMOUNT: true
+
+
   MINERAL_RANDOM_FACTOR: true
 
   MINERAL_DENSITY: true
+
   MINERAL_DENSITY_PROBABILITY: true
+
   MINERAL_DENSITY_CHANGE: true
 
   DENSITY_LOW: true
@@ -378,6 +383,7 @@ globals:
   REACTIONS: true
 
   BOOSTS: true
+
 
   PORTAL_UNSTABLE: true
   PORTAL_MIN_TIMEOUT: true
