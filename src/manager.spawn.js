@@ -1,41 +1,17 @@
-// Spawn Manager
 /**
-@module Spawn Manager
-*/
-
-
-/* ********** ********** Variables ********** ********** */
-
-/**
- * The global, room independant spawn queue.
- *
- * @typedef {Array} Memory.spawnQueue
- *
- */
-// Memory.spawnQueue
-
-
-/* ********** ********** JSDoc Definitions ********** ********** */
-
-/**
- * Called when a spawn starts spawning a requested creep.
- *
- * @callback requestCreepCallback
- *
- * @param {Creep} creep - The creep created by the spawn.
- *
+ * Module that manages the players spawns.
+ * @module SpawnManager
  */
 
+
+/* ********** ********** Type Definitions ********** ********** */
+
 /**
- * One entry of the spawn queue.
+ * Callback for notifying about the start of a creep's spawn process.
+ * @callback spawningCreepCallback
  *
- * @typedef {Object} SpawnQueueEntry
- *
- * @property {Array} body - An array of body parts for the creep,
- * @property {String} name - The name for the creep.
- * @property {Object} memory - The initial memory for the creep.
- * @property {requestCreepCallback} callback - The callback on spawning started.
- *
+ * @param {StructureSpawn} spawn - The spawn spawning the new creep.
+ * @param {Name} creepName - The new creep's name.
  */
 
 
@@ -43,41 +19,28 @@
 
 /**
  * Request the spawning of a creep.
- *
  * @public
- * @memberof Manager.Spawn
+ * @static
  *
- * @param {Array} body - A list of body parts for the creep.
- * @param {Object} [opts] - Options for the spawning.
- * @param {Room} [opts.room] - The room the creep should be spawned in.
- * @param {String} [opts.name] - The name of the creep.
- * @param {Object} [opts.memory] - The initial memory of the creep.
- * @param {requestCreepCallback} [opts.callback] - On creep spawning started callback.
- *
+ * @param {Array} body - An array describing the new creep’s body.
+ * @param {Object} [opts] - An object containing additional spawning options.
+ * @param {Room} [opts.room] - The room the new creep should be spawned in.
+ * @param {String} [opts.name] - The name of the new creep.
+ * @param {Object} [opts.memory] - The initial memory of the new creep.
+ * @param {spawningCreepCallback} [opts.callback] - A function called when a spawn starts spawning the new creep.
  */
 function requestCreep(body, opts) {
-  // select target spawn queue
   let queue
-  if (opts.room) {
-    // room specific spawn queue
-
-    /* TODO why???
-    if (!opts.room.memory)
-      opts.room.memory = Memory.rooms[opts.room.name]
-    console.log('asdf')
-    */
-
+  if (opts && opts.room) {
     if (!opts.room.memory.spawnQueue)
       opts.room.memory.spawnQueue = []
     queue = opts.room.memory.spawnQueue
   } else {
-    // global specific spawn queue
     if (!Memory.spawnQueue)
       Memory.spawnQueue = []
     queue = Memory.spawnQueue
   }
 
-  // add requested creep info to spawn queue
   queue.push({
     body,
     name: opts.name,
@@ -87,46 +50,67 @@ function requestCreep(body, opts) {
 }
 
 /**
- * Manage a given spawn. (Tick Action)
- *
+ * Calculate the costs needed to spawn a creep with the specified body.
  * @private
+ * @static
+ *
+ * @param {Array.<String>} body - The creep's body.
+ * @returns {Number} Returns the costs to spawn the creep.
+ */
+function getCreepBodyCosts(body) {
+  let costs = 0
+  for (const part of body)
+    costs += BODYPART_COST[part]
+  return costs
+}
+
+/**
+ * Dispatches a request from the spawn queue if possible.
+ * @private
+ * @static
+ *
+ * @param {StructureSpawn} spawn - The dispatching spawn.
+ */
+function spawnCreep(spawn) {
+  for (const queue of [spawn.room.memory.spawnQueue, Memory.spawnQueue])
+    if (queue && queue.length > 0) {
+      const creepInfo = queue[0]
+      const creepName = spawn.createCreep(
+          creepInfo.body,
+          creepInfo.name,
+          creepInfo.memory)
+      if (typeof creepName === 'string') {
+        queue.shift()
+        if (creepInfo.callback)
+          creepInfo.callback(spawn, creepName)
+      } else if (creepName !== ERR_NOT_ENOUGH_ENERGY || getCreepBodyCosts(creepInfo.body) > spawn.room.energyCapacityAvailable) {
+        queue.shift()
+        throw new Error(`Cannot spawn creep! (${ERR(creepName)})`)
+      }
+    }
+}
+
+/**
+ * Manage a given spawn.
+ * @private
+ * @static
  *
  * @param {StructureSpawn} spawn - The spawn to manage.
- *
  */
 function manageSpawn(spawn) {
-  // check if spawn is busy
   if (!spawn.spawning)
-    // check all possible spawn queues
-    spawnQueueDispatchLoop:
-    for (const queue of [spawn.room.memory.spawnQueue, Memory.spawnQueue])
-      if (queue && queue.length > 0) {
-        const creepInfo = queue[0]
-        // check if spawn can create a creep (if not continue to next spawn queue)
-        switch (spawn.canCreateCreep(creepInfo.body, creepInfo.name)) {
-        case OK:
-          break
-        case ERR_NOT_ENOUGH_ENERGY:
-          // do not spawn (wait for sufficient energy)
-          break spawnQueueDispatchLoop
-        default:
-          throw new Error('Cannot spawn creep!')
-        }
-        // start spawning the requested creep and remove it from the queue
-        queue.shift()
-        const creepName = spawn.createCreep(creepInfo.body, creepInfo.name, creepInfo.memory)
-        // notify requester about spawning
-        if (creepInfo.callback)
-          creepInfo.callback(creepName)
-        break
-      }
+    spawnCreep(spawn)
 }
 
 
 /* ********** ********** Manager Interface ********** ********** */
 
+/**
+ * The manager function called every tick.
+ * @public
+ * @static
+ */
 function loop() {
-  // manage all spawns
   for (const spawnName in Game.spawns) {
     const spawn = Game.spawns[spawnName]
     manageSpawn(spawn)

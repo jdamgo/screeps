@@ -4,6 +4,7 @@
 globals:
   ########## Extensions ##########
   ID: true
+  ERR: true
 
   ########## Console Line Interface ##########
   Player: true

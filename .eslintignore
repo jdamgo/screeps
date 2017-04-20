@@ -1,7 +1,9 @@
 
-# Exclude all files.
-*.js
-*/*.js
+# tern-js directory
+.tern
 
-# Include Screeps files.
-!src/*.js
+# distribution directory
+dist
+
+# documentation directory
+doc

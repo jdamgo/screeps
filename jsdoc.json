@@ -1,7 +1,8 @@
 {
   "source": {
     "include": ["./src"],
-    "includePattern": ".+\\.js(doc)?$"
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)[_']"
   },
   "opts": {
     "destination": "./doc",
