@@ -114,6 +114,22 @@ function newCreep(body, opts) {
   spawnManager.requestCreep(body, opts)
 }
 
+/* ********** ********** Functions ********** ********** */
+
+function checkFlags() {
+  let flag
+
+  flag = Game.flags['.exploit'] || Game.flags['.drop']
+  if (flag) {
+    const resource = flag.room.lookForAt(LOOK_SOURCES, flag.pos)[0] || flag.room.lookForAt(LOOK_MINERALS, flag.pos)[0]
+    if (resource)
+      Player[flag.name.slice(1)](resource)
+    else
+      console.warn('NO RES FOUND')
+    flag.remove()
+  }
+}
+
 
 /* ********** ********** Exports ********** ********** */
 
@@ -126,4 +142,8 @@ module.exports = function () {
     /* *** Spawn Management *** */
     newCreep,
   }
+
+  /* *** loop *** */
+  console.log('lib.player')
+  checkFlags()
 }

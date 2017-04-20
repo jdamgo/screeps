@@ -6,7 +6,6 @@
   },
   "opts": {
     "destination": "./doc",
-    "template": "node_modules/minami",
     "private": true
   },
   "plugins": [],
