@@ -23,3 +23,19 @@ parserOptions:
 env:
   es6: true
   node: true
+
+
+########## ########## Environment ########## ##########
+
+rules:
+  new-cap:
+    # modified: capIsNewExceptions
+    - Error
+    - newIsCap: true
+      capIsNew: true
+      newIsCapExceptions: []
+      newIsCapExceptionPattern: ''
+      # added 'ID' and 'ERR'
+      capIsNewExceptions: ['ID', 'ERR']
+      capIsNewExceptionPattern: ''
+      properties: true

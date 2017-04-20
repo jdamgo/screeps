@@ -1,7 +1,10 @@
 
 
-jsdoc:
+doc: FORCE
 	jsdoc --verbose -c jsdoc.json
 
-upload:
+upload: FORCE
 	grunt --gruntfile gruntfile.js screeps
+
+
+FORCE: ;

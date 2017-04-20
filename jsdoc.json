@@ -1,10 +1,12 @@
 {
   "source": {
     "include": ["./src"],
-    "includePattern": ".+\\.js(doc)?$"
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)[_']"
   },
   "opts": {
     "destination": "./doc",
+    "template": "node_modules/minami",
     "private": true
   },
   "plugins": [],
