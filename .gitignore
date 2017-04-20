@@ -36,5 +36,8 @@ node_modules
 # Screeps login credentials
 credentials.json
 
-# JSDoc Documentation
+# Distribution folder
+dist
+
+# JSDoc documentation
 doc

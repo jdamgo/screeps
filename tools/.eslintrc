@@ -1,0 +1,25 @@
+# ESLint configuration for tools files
+
+
+########## ########## Inherited Configurations ########## ##########
+
+extends: 'C:/Users/kilia/GitHub/github-misc/eslint/eslintrc.yml'
+
+
+########## ########## Parser & Parser Options ########## ##########
+
+parserOptions:
+  ecmaVersion: 8
+  sourceType: module
+  ecmaFeatures:
+    globalReturn: false
+    impliedStrict: false
+    jsx: true
+    experimentalObjectRestSpread: true
+
+
+########## ########## Environment ########## ##########
+
+env:
+  es6: true
+  node: true

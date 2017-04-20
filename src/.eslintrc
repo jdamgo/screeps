@@ -15,7 +15,10 @@ parserOptions:
   ecmaVersion: 6
   sourceType: module
   ecmaFeatures:
+    globalReturn: false
+    impliedStrict: false
     jsx: false
+    experimentalObjectRestSpread: true
 
 
 ########## ########## Environment ########## ##########
@@ -25,7 +28,7 @@ env:
   node: true
 
 
-########## ########## Environment ########## ##########
+########## ########## Rules ########## ##########
 
 rules:
   new-cap:
